@@ -1,108 +1,76 @@
-📘 Examination System
-📌 Overview
+ # Examination System
 
-This project implements an Examination System in C# following Object-Oriented Programming (OOP) concepts such as inheritance, abstraction, polymorphism, interfaces, and associations.
-It supports multiple exam types (Final Exam and Practical Exam) and different question types (True/False and MCQ).
+## 📌 Overview
+This project implements an **Examination System** in C#.  
+It supports two types of exams (**Final** and **Practical**) with different question types (MCQ and True/False).  
+The system also handles **Subjects**, **Questions**, and **Answers**, while applying **OOP principles** such as inheritance, polymorphism, and interfaces.
 
-✨ Features
+---
 
-Question Object
+## 🏗️ Features
+1. **Question Object**
+   - Header (Title of the question)
+   - Body (Content of the question)
+   - Mark
+   - List of possible answers
+   - Correct answer
 
-Contains:
+2. **Question Types**
+   - **Final Exam**
+     - True/False
+     - MCQ (Choose one answer)
+   - **Practical Exam**
+     - MCQ only
 
-Header
+3. **Answer Object**
+   - `AnswerId`
+   - `AnswerText`
 
-Body
+4. **Exam Object**
+   - Time of the exam
+   - Number of questions
+   - Shows exam differently depending on type:
+     - **Final Exam:** Shows questions, answers, and grade.
+     - **Practical Exam:** Shows right answer after finishing.
 
-Mark
+5. **Subject Object**
+   - Subject ID
+   - Subject Name
+   - Associated Exam
 
-Array of Answers (with the correct one).
+---
 
-Question Types
+## 🛠️ OOP Concepts Used
+- **Inheritance** → Base `Question` class and derived types (MCQ, True/False).
+- **Polymorphism** → `ShowExam()` method overridden for `FinalExam` and `PracticalExam`.
+- **Interfaces** → Implemented `ICloneable`, `IComparable`.
+- **Constructor Chaining** → To simplify object creation.
+- **ToString Override** → To display objects as formatted text.
 
-True/False Question (for Final Exam).
+---
 
-MCQ Question (for both Practical & Final Exams).
+## ▶️ Example Flow
+1. Create a `Subject` (e.g., "Math").
+2. Assign an `Exam` (Final or Practical).
+3. Add questions and answers.
+4. Run the exam:
+   - If **Practical**, display right answers after submission.
+   - If **Final**, display grade and detailed report.
 
-Exam Types
+---
 
-Final Exam: Shows Questions, Answers, and Grade.
-
-Practical Exam: Shows Questions and displays the right answers after finishing.
-
-Answer Object
-
-Includes AnswerId and AnswerText.
-
-Subject Object
-
-Contains SubjectId, SubjectName, and the Exam of the subject.
-
-Allows creating exams for subjects.
-
-OOP Concepts Used
-
-Abstraction & Inheritance → Base classes (Question, Exam) with derived types.
-
-Interface Implementation → ICloneable, IComparable.
-
-Constructor Chaining.
-
-ToString Override for readable outputs.
-
-📂 Project Structure
-Assignment/
+## 📂 Project Structure
+/ExaminationSystem
 │
-├── Models/
-│   ├── Answer.cs
-│   ├── Question.cs (abstract)
-│   ├── MCQQuestion.cs
-│   ├── TrueFalseQuestion.cs
-│   ├── Exam.cs (abstract)
-│   ├── FinalExam.cs
-│   ├── PracticalExam.cs
-│   └── Subject.cs
+├── Models
+│ ├── Question.cs
+│ ├── MCQQuestion.cs
+│ ├── TrueFalseQuestion.cs
+│ ├── Answer.cs
+│ ├── Exam.cs
+│ ├── FinalExam.cs
+│ ├── PracticalExam.cs
+│ ├── Subject.cs
 │
-├── Program.cs   // Entry point
+├── Program.cs
 └── README.md
-
-🛠️ Usage
-
-Create a Subject object.
-
-Attach an Exam (Final or Practical).
-
-Add Questions and Answers to the Exam.
-
-Run the ShowExam() method to start the exam.
-
-📌 Example (Main Method)
-static void Main(string[] args)
-{
-    Subject math = new Subject(1, "Mathematics");
-
-    Exam exam = new FinalExam(60, 2);
-    exam.Questions.Add(new TrueFalseQuestion("Q1", "2+2=4?", 1, true));
-    exam.Questions.Add(new MCQQuestion("Q2", "Capital of France?", 2,
-        new List<Answer> {
-            new Answer(1,"Berlin"),
-            new Answer(2,"Paris"),
-            new Answer(3,"Rome")
-        }, 2));
-
-    math.Exam = exam;
-    math.Exam.ShowExam();
-}
-
-📊 UML Diagram
-Subject → Exam → Question → Answer
-Exam: FinalExam, PracticalExam
-Question: MCQQuestion, TrueFalseQuestion
-
-✅ Future Enhancements
-
-Add database persistence for exams & results.
-
-Add user/student management.
-
-Add GUI instead of console-based interface.
