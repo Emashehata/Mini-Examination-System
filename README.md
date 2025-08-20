@@ -74,3 +74,7 @@ The system also handles **Subjects**, **Questions**, and **Answers**, while appl
 │
 ├── Program.cs
 └── README.md
+```
+## 📊 UML Class Diagram
+
+![Examination System Diagram](examDigram.png)
